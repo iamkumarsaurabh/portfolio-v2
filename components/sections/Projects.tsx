@@ -77,8 +77,8 @@ function ProjectCard({ p, delay }: { p: typeof PROJECTS[0]; delay: number }) {
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = cardRef.current; if (!el) return;
     const r = el.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width  - 0.5) * 14;
-    const y = ((e.clientY - r.top)  / r.height - 0.5) * -14;
+    const x = ((e.clientX - r.left) / r.width - 0.5) * 14;
+    const y = ((e.clientY - r.top) / r.height - 0.5) * -14;
     el.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) translateY(-4px)`;
   };
   const onLeave = () => { if (cardRef.current) cardRef.current.style.transform = ''; };
@@ -96,7 +96,6 @@ function ProjectCard({ p, delay }: { p: typeof PROJECTS[0]; delay: number }) {
       <div
         ref={cardRef}
         onMouseMove={onMove}
-        onMouseLeave={onLeave}
         className="group glass-liquid"
         style={{
           position: 'relative', borderRadius: '20px', padding: '32px',

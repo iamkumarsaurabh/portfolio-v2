@@ -73,7 +73,6 @@ function SkillGroup({ group, delay }: { group: typeof SKILLS[0]; delay: number }
       <div
         ref={cardRef}
         onMouseMove={onMove}
-        onMouseLeave={onLeave}
         className="group"
         style={{
           position: 'relative',
