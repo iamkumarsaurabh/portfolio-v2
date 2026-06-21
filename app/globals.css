@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════
+   DESIGN TOKENS — Cinematic Dark System
+   Inspired by: Linear, Vercel, Paco Cortes
+   UI/UX Pro Max: Cinema Mobile Dark + Exaggerated Minimalism
+   ════════════════════════════════════════════ */
+:root {
+  /* Backgrounds */
+  --bg-deep:     rgba(5,5,5,0.5);
+  --bg-base:     rgba(10,10,10,0.5);
+  --bg-elevated: rgba(17,17,17,0.5);
+  --bg-surface:  rgba(255,255,255,0.03);
+  --bg-surface-hover: rgba(255,255,255,0.08);
+
+  /* Typography */
+  --fg:          #EDEDEF;
+  --fg-muted:    #8A8F98;
+  --fg-subtle:   #3F3F46;
+
+  /* Accents */
+  --violet:      #7C3AED;
+  --violet-bright:#8B5CF6;
+  --violet-glow: rgba(124,58,237,0.25);
+  --cyan:        #06B6D4;
+  --cyan-glow:   rgba(6,182,212,0.2);
+  --amber:       #F59E0B;
+
+  /* Borders */
+  --border:      rgba(255,255,255,0.06);
+  --border-md:   rgba(255,255,255,0.10);
+  --border-lg:   rgba(255,255,255,0.16);
+
+  /* Typography Scale */
+  /* variables are injected by next/font via layout.tsx */
+
+  /* Motion */
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+}
+
+/* ── Light Mode Override ── */
+.light {
+  --bg-deep:     rgba(250,250,250,0.5);
+  --bg-base:     rgba(244,244,245,0.5);
+  --bg-elevated: rgba(255,255,255,0.5);
+  --bg-surface:  rgba(0,0,0,0.03);
+  --bg-surface-hover: rgba(0,0,0,0.06);
+  --fg:          #09090B;
+  --fg-muted:    #3F3F46;
+  --fg-subtle:   #71717A;
+  --border:      rgba(0,0,0,0.06);
+  --border-md:   rgba(0,0,0,0.10);
+  --border-lg:   rgba(0,0,0,0.16);
+  --violet-glow: rgba(124,58,237,0.12);
+  --cyan-glow:   rgba(6,182,212,0.10);
+}
+
+/* ════ Reset ════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition:
+    background-color 600ms var(--ease-expo),
+    color 400ms var(--ease-expo);
+  cursor: none; /* We'll use a custom cursor */
+}
+
+/* ════ Custom Cursor ════ */
+#cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--violet-bright);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 80ms linear, width 200ms var(--ease-expo), height 200ms var(--ease-expo), background 200ms;
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--border-lg);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 500ms var(--ease-expo), width 300ms var(--ease-expo), height 300ms var(--ease-expo), border-color 200ms;
+}
+
+body:has(a:hover) #cursor-dot,
+body:has(button:hover) #cursor-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--cyan);
+}
+
+body:has(a:hover) #cursor-ring,
+body:has(button:hover) #cursor-ring {
+  width: 56px;
+  height: 56px;
+  border-color: var(--violet);
+}
+
+/* ════ Typography ════ */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  color: var(--fg);
+}
+
+/* Giant Display Type — Exaggerated Minimalism */
+.display-giant {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.display-large {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.display-outline {
+  -webkit-text-stroke: 1.5px var(--fg);
+  color: transparent;
+}
+
+.display-outline-accent {
+  -webkit-text-stroke: 1.5px var(--violet-bright);
+  color: transparent;
+}
+
+/* ════ Gradient Utilities ════ */
+.text-gradient {
+  background: linear-gradient(135deg, var(--violet-bright) 0%, var(--cyan) 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(135deg, var(--amber) 0%, var(--violet-bright) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ════ Glass Surface ════ */
+.glass {
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--border-md);
+}
+
+.light .glass {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid var(--border-md);
+}
+
+/* ════ Glassmorphism Effect ════ */
+.glass-liquid {
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-lg);
+}
+
+.light .glass-liquid {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* ════ Noise Grain Texture ════ */
+.noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.038;
+  pointer-events: none;
+  z-index: 1000;
+  mix-blend-mode: overlay;
+}
+
+/* ════ Section Divider ════ */
+.section-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ════ Scrollbar ════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--fg-subtle);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--violet); }
+
+/* ════ Selection ════ */
+::selection {
+  background: var(--violet);
+  color: #fff;
+}
+
+/* ════ Focus ════ */
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ════ Keyframe Library ════ */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-18px); }
+}
+
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33%       { transform: translate(40px,-30px) scale(1.08); }
+  66%       { transform: translate(-30px,20px) scale(0.94); }
+}
+
+@keyframes ping-slow {
+  0%        { transform: scale(1); opacity: 0.8; }
+  70%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes counter-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes shimmer-line {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ════ Marquee Track ════ */
+.marquee-inner {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee-inner:hover { animation-play-state: paused; }
+
+/* ════ Ambient Blob ════ */
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: blob-drift 12s ease-in-out infinite;
+}
+
+/* ════ Number Counter ════ */
+.counter-clip {
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* ════ Progress Bar ════ */
+.skill-bar {
+  position: relative;
+  height: 2px;
+  background: var(--border-md);
+  overflow: visible;
+}
+.skill-bar-fill {
+  height: 100%;
+  position: relative;
+  transition: width 1.2s var(--ease-expo);
+  background: linear-gradient(90deg, var(--violet) 0%, var(--cyan) 100%);
+}
+.skill-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+/* ════ Magnetic Button Base ════ */
+.magnetic {
+  transition: transform 500ms var(--ease-expo);
+}
+
+/* ════ Reveal Utility ════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 800ms var(--ease-expo),
+    transform 800ms var(--ease-expo);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ════ Card Hover Glow ════ */
+.card-hover {
+  transition:
+    transform 500ms var(--ease-expo),
+    border-color 300ms,
+    box-shadow 400ms;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-lg);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+}
+
+/* ════ Underline Link ════ */
+.underline-link {
+  position: relative;
+  display: inline-block;
+}
+.underline-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--fg);
+  transition: width 350ms var(--ease-expo);
+}
+.underline-link:hover::after { width: 100%; }
+
+/* ════ Tag Chip ════ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-md);
+  color: var(--fg-muted);
+  transition: border-color 200ms, color 200ms;
+}
+.tag:hover {
+  border-color: var(--violet);
+  color: var(--violet-bright);
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+}
