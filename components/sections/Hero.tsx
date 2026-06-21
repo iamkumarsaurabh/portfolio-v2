@@ -19,8 +19,8 @@ function MagneticBtn({
   const ref = useRef<HTMLAnchorElement>(null);
   const onMove = (e: React.MouseEvent) => {
     const el = ref.current; if (!el) return;
-    const r  = el.getBoundingClientRect();
-    el.style.transform = `translate(${(e.clientX - r.left - r.width/2)*0.3}px,${(e.clientY - r.top - r.height/2)*0.3}px)`;
+    const r = el.getBoundingClientRect();
+    el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.3}px,${(e.clientY - r.top - r.height / 2) * 0.3}px)`;
   };
   const onLeave = () => { if (ref.current) ref.current.style.transform = ''; };
 
@@ -48,7 +48,7 @@ function MagneticBtn({
   );
 
   return (
-    <a ref={ref} href={href} onMouseMove={onMove} onMouseLeave={onLeave}
+    <a ref={ref} href={href} onMouseMove={onMove}
       className="group magnetic inline-flex items-center gap-2"
       style={{
         padding: '14px 28px',
@@ -69,6 +69,7 @@ function MagneticBtn({
         e.currentTarget.style.borderColor = 'var(--border-lg)';
       }}
       onMouseLeave={e => {
+        onLeave(); // Triggers the magnetic reset
         e.currentTarget.style.color = 'var(--fg-muted)';
         e.currentTarget.style.borderColor = 'var(--border-md)';
       }}
@@ -85,7 +86,7 @@ const containerV = {
 };
 const itemV = {
   hidden: { opacity: 0, y: 50 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
 };
 
 export default function Hero() {
