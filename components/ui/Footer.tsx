@@ -31,25 +31,25 @@ const TwitterIcon = (p: any) => (
 );
 
 const SOCIALS = [
-  { icon: GithubIcon,    href: 'https://github.com/iamkumarsaurabh',           label: 'GitHub'    },
-  { icon: LinkedinIcon,  href: 'https://www.linkedin.com/in/iamkumarsaurabh/', label: 'LinkedIn'  },
+  { icon: GithubIcon, href: 'https://github.com/iamkumarsaurabh', label: 'GitHub' },
+  { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/iamkumarsaurabh/', label: 'LinkedIn' },
   { icon: InstagramIcon, href: 'https://www.instagram.com/multiverseofsaurabh/', label: 'Instagram' },
-  { icon: TwitterIcon,   href: 'https://x.com/KSaurabh5808',                   label: 'Twitter/X' },
+  { icon: TwitterIcon, href: 'https://x.com/KSaurabh5808', label: 'Twitter/X' },
 ];
 
 function MagneticSocial({ icon: Icon, href, label }: { icon: React.ElementType; href: string; label: string }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const onMove = (e: React.MouseEvent) => {
     const el = ref.current; if (!el) return;
-    const r  = el.getBoundingClientRect();
-    el.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.4}px, ${(e.clientY - r.top - r.height/2) * 0.4}px)`;
+    const r = el.getBoundingClientRect();
+    el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.4}px, ${(e.clientY - r.top - r.height / 2) * 0.4}px)`;
   };
   const onLeave = () => { if (ref.current) ref.current.style.transform = ''; };
 
   return (
     <a
       ref={ref} href={href} target="_blank" rel="noreferrer" aria-label={label}
-      onMouseMove={onMove} onMouseLeave={onLeave}
+      onMouseMove={onMove}
       className="magnetic group"
       style={{
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -76,19 +76,19 @@ function MagneticSocial({ icon: Icon, href, label }: { icon: React.ElementType; 
 
 export default function Footer() {
   return (
-    <footer style={{ 
-      position: 'relative', zIndex: 2, 
-      padding: '60px 24px', 
+    <footer style={{
+      position: 'relative', zIndex: 2,
+      padding: '60px 24px',
       background: 'var(--bg-deep)',
       backdropFilter: 'blur(24px)',
-      borderTop: '1px solid var(--border)' 
+      borderTop: '1px solid var(--border)'
     }}>
       <div style={{
         maxWidth: '1200px', margin: '0 auto',
         display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between',
         gap: '32px'
       }}>
-        
+
         <div>
           <div style={{
             fontFamily: 'var(--font-display)', fontSize: '24px', fontWeight: 900,
